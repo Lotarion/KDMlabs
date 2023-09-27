@@ -1,15 +1,51 @@
-# This is a sample Python script.
+def get_args(args: tuple) -> list:
+    value = []
+    if len(args) == 1:
+        for item in args[0]:
+            value.append(item)
+    else:
+        for item in args:
+            value.append(item)
+    return value
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+
+class DmSet:
+    def __init__(self, *args):
+        self.values = []
+
+        items = get_args(args)
+
+        for item in items:
+            if not(item in self.values):
+                self.values.append(item)
+
+        self.values.sort(key=lambda x: (isinstance(x, int), x))
+
+    def add(self, other):
+        if not (other in self.values):
+            self.values.append(other)
+        self.values.sort(key=lambda x: (isinstance(x, int), x))
+        return self.values
+
+    def remove(self, other):
+        if other in self.values:
+            self.values.remove(other)
+        self.values.sort(key=lambda x: (isinstance(x, int), x))
+        return self.values
+
+    def contains(self, other):
+        return other in self.values
+
+    def __str__(self):
+        return self.values
+
+    # def __iter__(self) -> iter:
+    #     return iter(self.values)
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def main():
+    print("Hello World!")
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    main()
