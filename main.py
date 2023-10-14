@@ -1,3 +1,4 @@
+
 def get_args(args: tuple) -> list:
     value = []
     if len(args) == 1:
@@ -62,6 +63,22 @@ class DmSet:
         self.values = new
         self.values.sort(key=lambda x: (isinstance(x, int), x))
 
+    def difference(self, *args):
+        other = get_args(args)
+        for value in self.values:
+            if value in other:
+                self.remove(value)
+        self.values.sort(key=lambda x: (isinstance(x, int), x))
+
+    def complement(self, *args):
+        other = get_args(args)
+        new = []
+        for value in other:
+            if not (value in self.values):
+                new.append(value)
+        self.values = new
+        self.values.sort(key=lambda x: (isinstance(x, int), x))
+
     def __iter__(self) -> iter:
         return iter(self.values)
 
@@ -72,10 +89,22 @@ class DmSet:
 def main():
     set1 = DmSet(1, 2, 2, 3)
     print(set1)
-    set1.add(5)
-    set1.add(3)
-    set1.union(DmSet(1, 9, 4))
+    set1.add(4)
     print(set1)
+    set1.remove(4)
+    print(set1)
+    print(set1.contains(4))
+    set1.union([3, 4, 5])
+    print(set1)
+    set2 = DmSet(1, 2, 3)
+    set2.intersection(DmSet(3, 4, 5))
+    print(set2)
+    set3 = DmSet([1, 2, 3])
+    set3.difference(3, 4, 5)
+    print(set3)
+    set4 = DmSet(1, 2, 3)
+    set4.complement([1, 2, 3, 4, 5])
+    print(set4)
 
 
 if __name__ == '__main__':
