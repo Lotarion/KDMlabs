@@ -47,6 +47,9 @@ class DmSet:
     def contains(self, other):
         return other in self.values
 
+    def length(self):
+        return len(self.values)
+
     def union(self, *args):
         other = get_args(args)
         for item in other:
@@ -84,6 +87,15 @@ class DmSet:
 
     def __repr__(self):
         return f'({str(self.values)[1:-1]})'
+
+    def __lt__(self, other):
+        return hash(self) < hash(other)
+
+    def __eq__(self, other):
+        return hash(self) == hash(other)
+
+    def __hash__(self):
+        return hash(tuple(self.values))
 
 
 def main():
