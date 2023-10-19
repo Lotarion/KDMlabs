@@ -1,4 +1,4 @@
-from labwork1 import DmSet, DmSetError, ItemNotFoundError, get_args
+from labwork1 import DmSet
 
 
 def cartesian_product(set_a: DmSet, set_b: DmSet):
